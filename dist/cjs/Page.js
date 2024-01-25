@@ -225,7 +225,7 @@ const Page = function Page(props) {
         scale,
     ]);
     const eventProps = (0, react_1.useMemo)(() => (0, make_event_props_1.default)(otherProps, () => page ? (scale ? (0, utils_js_1.makePageCallback)(page, scale) : undefined) : page), [otherProps, page, scale]);
-    const pageKey = `${pageIndex}@${scale}/${rotate}`;
+    const pageKey = `${pageIndex}/${rotate}`;
     const pageKeyNoScale = `${pageIndex}/${rotate}`;
     function renderMainLayer() {
         switch (renderMode) {
