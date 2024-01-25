@@ -1,0 +1,9 @@
+import React from 'react';
+import type { PDFDocumentProxy } from 'pdfjs-dist';
+type PDFOutline = Awaited<ReturnType<PDFDocumentProxy['getOutline']>>;
+type PDFOutlineItem = PDFOutline[number];
+type OutlineItemProps = {
+    item: PDFOutlineItem;
+};
+export default function OutlineItem(props: OutlineItemProps): React.JSX.Element;
+export {};
