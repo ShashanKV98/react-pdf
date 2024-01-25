@@ -93,11 +93,11 @@ export default function PageCanvas(props: PageCanvasProps) {
     }
 
     // Ensures the canvas will be re-rendered from scratch. Otherwise all form data will stay.
-    page.cleanup();
+    // page.cleanup();
 
     const { current: canvas } = canvasElement;
 
-    if (!canvas) {
+    if (!canvas) { 
       return;
     }
 
@@ -106,7 +106,7 @@ export default function PageCanvas(props: PageCanvasProps) {
 
     canvas.style.width = `${Math.floor(viewport.width)}px`;
     canvas.style.height = `${Math.floor(viewport.height)}px`;
-    canvas.style.visibility = 'visible';
+    // canvas.style.visibility = 'visible';
 
     const renderContext: RenderParameters = {
       annotationMode: renderForms ? ANNOTATION_MODE.ENABLE_FORMS : ANNOTATION_MODE.ENABLE,
@@ -122,7 +122,7 @@ export default function PageCanvas(props: PageCanvasProps) {
 
     cancellable.promise
       .then(() => {
-        canvas.style.visibility = '';
+        // canvas.style.visibility = 'visible';
 
         onRenderSuccess();
       })
@@ -146,20 +146,20 @@ export default function PageCanvas(props: PageCanvasProps) {
     ],
   );
 
-  const cleanup = useCallback(() => {
-    const { current: canvas } = canvasElement;
+  // const cleanup = useCallback(() => {
+  //   const { current: canvas } = canvasElement;
 
-    /**
-     * Zeroing the width and height cause most browsers to release graphics
-     * resources immediately, which can greatly reduce memory consumption.
-     */
-    if (canvas) {
-      // canvas.width = 0;
-      // canvas.height = 0;
-    }
-  }, [canvasElement]);
+  //   /**
+  //    * Zeroing the width and height cause most browsers to release graphics
+  //    * resources immediately, which can greatly reduce memory consumption.
+  //    */
+  //   if (canvas) {
+  //     canvas.width = 0;
+  //     canvas.height = 0;
+  //   }
+  // }, [canvasElement]);
 
-  useEffect(() => cleanup, [cleanup]);
+  // useEffect(() => cleanup, [cleanup]);
 
   return (
     <canvas
