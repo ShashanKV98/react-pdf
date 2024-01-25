@@ -47,7 +47,7 @@ export default function PageCanvas(props) {
             return;
         }
         // Ensures the canvas will be re-rendered from scratch. Otherwise all form data will stay.
-        page.cleanup();
+        // page.cleanup();
         const { current: canvas } = canvasElement;
         if (!canvas) {
             return;
