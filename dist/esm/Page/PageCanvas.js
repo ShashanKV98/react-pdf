@@ -69,7 +69,7 @@ export default function PageCanvas(props) {
         const runningTask = cancellable;
         cancellable.promise
             .then(() => {
-            canvas.style.visibility = '';
+            canvas.style.visibility = 'visible';
             onRenderSuccess();
         })
             .catch(onRenderError);
