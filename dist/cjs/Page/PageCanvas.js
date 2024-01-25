@@ -84,7 +84,7 @@ function PageCanvas(props) {
         canvas.height = renderViewport.height;
         canvas.style.width = `${Math.floor(viewport.width)}px`;
         canvas.style.height = `${Math.floor(viewport.height)}px`;
-        canvas.style.visibility = 'hidden';
+        canvas.style.visibility = 'visible';
         const renderContext = {
             annotationMode: renderForms ? ANNOTATION_MODE.ENABLE_FORMS : ANNOTATION_MODE.ENABLE,
             canvasContext: canvas.getContext('2d', { alpha: false }),
