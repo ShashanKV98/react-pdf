@@ -567,7 +567,7 @@ const Page: React.FC<PageProps> = function Page(props) {
     [otherProps, page, scale],
   );
 
-  const pageKey = `${pageIndex}@${scale}/${rotate}`;
+  const pageKey = `${pageIndex}/${rotate}`;
 
   const pageKeyNoScale = `${pageIndex}/${rotate}`;
 
