@@ -94,8 +94,8 @@ export default function PageCanvas(props) {
          * resources immediately, which can greatly reduce memory consumption.
          */
         if (canvas) {
-            canvas.width = 0;
-            canvas.height = 0;
+            // canvas.width = 0;
+            // canvas.height = 0;
         }
     }, [canvasElement]);
     useEffect(() => cleanup, [cleanup]);
