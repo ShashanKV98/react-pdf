@@ -106,7 +106,7 @@ export default function PageCanvas(props: PageCanvasProps) {
 
     canvas.style.width = `${Math.floor(viewport.width)}px`;
     canvas.style.height = `${Math.floor(viewport.height)}px`;
-    canvas.style.visibility = 'hidden';
+    canvas.style.visibility = 'visible';
 
     const renderContext: RenderParameters = {
       annotationMode: renderForms ? ANNOTATION_MODE.ENABLE_FORMS : ANNOTATION_MODE.ENABLE,
