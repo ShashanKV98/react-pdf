@@ -75,7 +75,7 @@ function PageCanvas(props) {
             return;
         }
         // Ensures the canvas will be re-rendered from scratch. Otherwise all form data will stay.
-        page.cleanup();
+        // page.cleanup();
         const { current: canvas } = canvasElement;
         if (!canvas) {
             return;
@@ -84,7 +84,7 @@ function PageCanvas(props) {
         canvas.height = renderViewport.height;
         canvas.style.width = `${Math.floor(viewport.width)}px`;
         canvas.style.height = `${Math.floor(viewport.height)}px`;
-        canvas.style.visibility = 'visible';
+        canvas.style.visibility = 'hidden';
         const renderContext = {
             annotationMode: renderForms ? ANNOTATION_MODE.ENABLE_FORMS : ANNOTATION_MODE.ENABLE,
             canvasContext: canvas.getContext('2d', { alpha: false }),
@@ -97,7 +97,7 @@ function PageCanvas(props) {
         const runningTask = cancellable;
         cancellable.promise
             .then(() => {
-            canvas.style.visibility = 'visible';
+            canvas.style.visibility = '';
             onRenderSuccess();
         })
             .catch(onRenderError);
@@ -115,18 +115,18 @@ function PageCanvas(props) {
         renderViewport,
         viewport,
     ]);
-    const cleanup = (0, react_1.useCallback)(() => {
-        const { current: canvas } = canvasElement;
-        /**
-         * Zeroing the width and height cause most browsers to release graphics
-         * resources immediately, which can greatly reduce memory consumption.
-         */
-        if (canvas) {
-            canvas.width = renderViewport.width;
-            canvas.height = renderViewport.height;
-        }
-    }, [canvasElement, renderViewport]);
-    (0, react_1.useEffect)(() => cleanup, [cleanup]);
+    // const cleanup = useCallback(() => {
+    //   const { current: canvas } = canvasElement;
+    //   /**
+    //    * Zeroing the width and height cause most browsers to release graphics
+    //    * resources immediately, which can greatly reduce memory consumption.
+    //    */
+    //   if (canvas) {
+    //     canvas.width = renderViewport.width
+    //     canvas.height = renderViewport.height
+    //   }
+    // }, [canvasElement]);
+    // useEffect(() => cleanup, [cleanup]);
     return (react_1.default.createElement("canvas", { className: `${_className}__canvas`, dir: "ltr", ref: (0, merge_refs_1.default)(canvasRef, canvasElement), style: {
             display: 'block',
             userSelect: 'none',
