@@ -71,7 +71,9 @@ const Page = function Page(props) {
     const { value: page, error: pageError } = pageState;
     const pageElement = (0, react_1.useRef)(null);
     (0, tiny_invariant_1.default)(pdf, 'Attempted to load a page, but no document was specified.');
-    const pageIndex = (0, utils_js_1.isProvided)(pageNumberProps) ? pageNumberProps - 1 : pageIndexProps !== null && pageIndexProps !== void 0 ? pageIndexProps : null;
+    const pageIndex = (0, utils_js_1.isProvided)(pageNumberProps)
+        ? pageNumberProps - 1
+        : pageIndexProps !== null && pageIndexProps !== void 0 ? pageIndexProps : null;
     const pageNumber = pageNumberProps !== null && pageNumberProps !== void 0 ? pageNumberProps : ((0, utils_js_1.isProvided)(pageIndexProps) ? pageIndexProps + 1 : null);
     const rotate = rotateProps !== null && rotateProps !== void 0 ? rotateProps : (page ? page.rotate : null);
     const scale = (0, react_1.useMemo)(() => {
@@ -84,7 +86,10 @@ const Page = function Page(props) {
         const scaleWithDefault = scaleProps !== null && scaleProps !== void 0 ? scaleProps : defaultScale;
         // If width/height is defined, calculate the scale of the page so it could be of desired width.
         if (width || height) {
-            const viewport = page.getViewport({ scale: 1, rotation: rotate });
+            const viewport = page.getViewport({
+                scale: 1,
+                rotation: rotate,
+            });
             if (width) {
                 pageScale = width / viewport.width;
             }
@@ -105,7 +110,12 @@ const Page = function Page(props) {
             }
         };
     }
-    (0, react_1.useEffect)(hook, [_enableRegisterUnregisterPage, pdf, pageIndex, unregisterPage]);
+    (0, react_1.useEffect)(hook, [
+        _enableRegisterUnregisterPage,
+        pdf,
+        pageIndex,
+        unregisterPage,
+    ]);
     /**
      * Called when a page is loaded successfully
      */
@@ -173,7 +183,11 @@ const Page = function Page(props) {
     [page, scale]);
     const childContext = (0, react_1.useMemo)(() => 
     // Technically there cannot be page without pageIndex, pageNumber, rotate and scale, but TypeScript doesn't know that
-    page && (0, utils_js_1.isProvided)(pageIndex) && pageNumber && (0, utils_js_1.isProvided)(rotate) && (0, utils_js_1.isProvided)(scale)
+    page &&
+        (0, utils_js_1.isProvided)(pageIndex) &&
+        pageNumber &&
+        (0, utils_js_1.isProvided)(rotate) &&
+        (0, utils_js_1.isProvided)(scale)
         ? {
             _className,
             canvasBackground,
@@ -267,13 +281,13 @@ const Page = function Page(props) {
     }
     function renderContent() {
         if (!pageNumber) {
-            return react_1.default.createElement(Message_js_1.default, { type: "no-data" }, typeof noData === 'function' ? noData() : noData);
+            return (react_1.default.createElement(Message_js_1.default, { type: 'no-data' }, typeof noData === 'function' ? noData() : noData));
         }
         if (pdf === null || page === undefined || page === null) {
-            return (react_1.default.createElement(Message_js_1.default, { type: "loading" }, typeof loading === 'function' ? loading() : loading));
+            return (react_1.default.createElement(Message_js_1.default, { type: 'loading' }, typeof loading === 'function' ? loading() : loading));
         }
         if (pdf === false || page === false) {
-            return react_1.default.createElement(Message_js_1.default, { type: "error" }, typeof error === 'function' ? error() : error);
+            return (react_1.default.createElement(Message_js_1.default, { type: 'error' }, typeof error === 'function' ? error() : error));
         }
         return renderChildren();
     }

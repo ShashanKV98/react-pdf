@@ -24,7 +24,7 @@ import PageCanvas from './Page/PageCanvas.js';
 import PageSVG from './Page/PageSVG.js';
 import TextLayer from './Page/TextLayer.js';
 import AnnotationLayer from './Page/AnnotationLayer.js';
-import { cancelRunningTask, isProvided, makePageCallback } from './shared/utils.js';
+import { cancelRunningTask, isProvided, makePageCallback, } from './shared/utils.js';
 import useDocumentContext from './shared/hooks/useDocumentContext.js';
 import useResolver from './shared/hooks/useResolver.js';
 import { eventProps, isClassName, isPageIndex, isPageNumber, isPdf, isRef, isRenderMode, isRotate, } from './shared/propTypes.js';
@@ -43,7 +43,9 @@ const Page = function Page(props) {
     const { value: page, error: pageError } = pageState;
     const pageElement = useRef(null);
     invariant(pdf, 'Attempted to load a page, but no document was specified.');
-    const pageIndex = isProvided(pageNumberProps) ? pageNumberProps - 1 : pageIndexProps !== null && pageIndexProps !== void 0 ? pageIndexProps : null;
+    const pageIndex = isProvided(pageNumberProps)
+        ? pageNumberProps - 1
+        : pageIndexProps !== null && pageIndexProps !== void 0 ? pageIndexProps : null;
     const pageNumber = pageNumberProps !== null && pageNumberProps !== void 0 ? pageNumberProps : (isProvided(pageIndexProps) ? pageIndexProps + 1 : null);
     const rotate = rotateProps !== null && rotateProps !== void 0 ? rotateProps : (page ? page.rotate : null);
     const scale = useMemo(() => {
@@ -56,7 +58,10 @@ const Page = function Page(props) {
         const scaleWithDefault = scaleProps !== null && scaleProps !== void 0 ? scaleProps : defaultScale;
         // If width/height is defined, calculate the scale of the page so it could be of desired width.
         if (width || height) {
-            const viewport = page.getViewport({ scale: 1, rotation: rotate });
+            const viewport = page.getViewport({
+                scale: 1,
+                rotation: rotate,
+            });
             if (width) {
                 pageScale = width / viewport.width;
             }
@@ -77,7 +82,12 @@ const Page = function Page(props) {
             }
         };
     }
-    useEffect(hook, [_enableRegisterUnregisterPage, pdf, pageIndex, unregisterPage]);
+    useEffect(hook, [
+        _enableRegisterUnregisterPage,
+        pdf,
+        pageIndex,
+        unregisterPage,
+    ]);
     /**
      * Called when a page is loaded successfully
      */
@@ -145,7 +155,11 @@ const Page = function Page(props) {
     [page, scale]);
     const childContext = useMemo(() => 
     // Technically there cannot be page without pageIndex, pageNumber, rotate and scale, but TypeScript doesn't know that
-    page && isProvided(pageIndex) && pageNumber && isProvided(rotate) && isProvided(scale)
+    page &&
+        isProvided(pageIndex) &&
+        pageNumber &&
+        isProvided(rotate) &&
+        isProvided(scale)
         ? {
             _className,
             canvasBackground,
@@ -239,13 +253,13 @@ const Page = function Page(props) {
     }
     function renderContent() {
         if (!pageNumber) {
-            return React.createElement(Message, { type: "no-data" }, typeof noData === 'function' ? noData() : noData);
+            return (React.createElement(Message, { type: 'no-data' }, typeof noData === 'function' ? noData() : noData));
         }
         if (pdf === null || page === undefined || page === null) {
-            return (React.createElement(Message, { type: "loading" }, typeof loading === 'function' ? loading() : loading));
+            return (React.createElement(Message, { type: 'loading' }, typeof loading === 'function' ? loading() : loading));
         }
         if (pdf === false || page === false) {
-            return React.createElement(Message, { type: "error" }, typeof error === 'function' ? error() : error);
+            return (React.createElement(Message, { type: 'error' }, typeof error === 'function' ? error() : error));
         }
         return renderChildren();
     }
