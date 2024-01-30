@@ -75,7 +75,7 @@ function PageCanvas(props) {
             return;
         }
         // Ensures the canvas will be re-rendered from scratch. Otherwise all form data will stay.
-        page.cleanup();
+        page.cleanup(true);
         const { current: canvas } = canvasElement;
         if (!canvas) {
             return;
@@ -115,18 +115,18 @@ function PageCanvas(props) {
         renderViewport,
         viewport,
     ]);
-    const cleanup = (0, react_1.useCallback)(() => {
-        const { current: canvas } = canvasElement;
-        /**
-         * Zeroing the width and height cause most browsers to release graphics
-         * resources immediately, which can greatly reduce memory consumption.
-         */
-        if (canvas) {
-            canvas.width = renderViewport.width;
-            canvas.height = renderViewport.height;
-        }
-    }, [canvasElement, renderViewport]);
-    (0, react_1.useEffect)(() => cleanup, [cleanup]);
+    // const cleanup = useCallback(() => {
+    //   const { current: canvas } = canvasElement;
+    //   /**
+    //    * Zeroing the width and height cause most browsers to release graphics
+    //    * resources immediately, which can greatly reduce memory consumption.
+    //    */
+    //   if (canvas) {
+    //     canvas.width = renderViewport.width
+    //     canvas.height = renderViewport.height
+    //   }
+    // }, [canvasElement,renderViewport]);
+    // useEffect(() => cleanup, [cleanup]);
     return (react_1.default.createElement("canvas", { className: `${_className}__canvas`, dir: "ltr", ref: (0, merge_refs_1.default)(canvasRef, canvasElement), style: {
             display: 'block',
             userSelect: 'none',
